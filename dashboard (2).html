@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VoiceGuard - Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0f172a;
+            color: #1e293b;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 230px;
+            height: 100vh;
+            background: #111827;
+            padding: 30px 20px;
+        }
+
+        .logo {
+            color: #3b82f6;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 45px;
+        }
+
+        .nav-button {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #1e293b;
+            color: #cbd5e1;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .nav-button:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            width: 190px;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #334155;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 230px;
+            min-height: 100vh;
+            padding: 45px 55px;
+            background: #f8fafc;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 35px;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1050px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+        }
+
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .card button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Status */
+        .status {
+            margin-top: 30px;
+            max-width: 1050px;
+            background: white;
+            padding: 22px 28px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .status-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .status-text {
+            color: #16a34a;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">VoiceGuard</div>
+
+        <div class="tagline">
+            AI-Powered Voice Security
+        </div>
+
+        <button class="nav-button">🏠 Dashboard</button>
+
+        <button class="nav-button">🎙️ Analyze Audio</button>
+
+        <button class="nav-button">🎤 Record Voice</button>
+
+        <button class="nav-button">📊 Detection History</button>
+
+        <button class="logout">Logout</button>
+
+    </div>
+
+
+    <!-- Main Dashboard -->
+    <div class="main">
+
+        <div class="welcome">
+
+            <h1>Welcome to VoiceGuard 👋</h1>
+
+            <p>
+                Protect yourself from AI-generated voice cloning
+                and impersonation attacks.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">🎙️</div>
+
+                <h2>Analyze Audio</h2>
+
+                <p>
+                    Upload an audio file and analyze it
+                    for possible voice cloning.
+                </p>
+
+                <button>Analyze Audio</button>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🎤</div>
+
+                <h2>Record Voice</h2>
+
+                <p>
+                    Record a voice sample and check
+                    whether it appears synthetic.
+                </p>
+
+                <button>Start Recording</button>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">📊</div>
+
+                <h2>Detection History</h2>
+
+                <p>
+                    View previous audio analyses,
+                    results and risk scores.
+                </p>
+
+                <button>View History</button>
+
+            </div>
+
+        </div>
+
+
+        <div class="status">
+
+            <div class="status-title">
+                System Status
+            </div>
+
+            <div class="status-text">
+                ● VoiceGuard system is ready
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        /* ================= SIMPLE DEMO AUTH GUARD (no backend) ================= */
+
+        const loggedInEmail =
+            localStorage.getItem("vg_user_email");
+
+        if (!loggedInEmail) {
+
+            window.location.href = "index.html";
+
+        } else {
+
+            const welcomeText = document.querySelector(".welcome p");
+
+            welcomeText.textContent =
+                "Logged in as " + loggedInEmail + " — protect yourself from AI voice cloning and impersonation attacks.";
+        }
+
+
+        /* LOGOUT */
+
+        document.querySelector(".logout")
+            .addEventListener("click", () => {
+
+                localStorage.removeItem("vg_user_email");
+
+                localStorage.removeItem("vg_user_name");
+
+                window.location.href = "index.html";
+
+            });
+
+
+        /* DEMO PLACEHOLDER ACTIONS for the nav/card buttons */
+
+        document.querySelectorAll(".card button, .nav-button")
+            .forEach((btn) => {
+
+                btn.addEventListener("click", () => {
+
+                    if (!btn.classList.contains("logout")) {
+
+                        alert("This feature is coming soon in the full version of VoiceGuard.");
+
+                    }
+
+                });
+
+            });
+
+    </script>
+
+</body>
+</html>

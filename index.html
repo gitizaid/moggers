@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceGuard - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f4f7fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 1050px;
+            min-height: 650px;
+            display: flex;
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        /* LEFT SIDE */
+
+        .left-section {
+            width: 50%;
+            background: linear-gradient(145deg, #101827, #17243a);
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .logo span {
+            color: #4f8cff;
+        }
+
+        .left-section h1 {
+            font-size: 43px;
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .left-section p {
+            color: #b7c1d1;
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 430px;
+        }
+
+        .security-box {
+            margin-top: 35px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .security-box strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .security-box span {
+            font-size: 13px;
+            color: #aeb9ca;
+        }
+
+        /* RIGHT SIDE */
+
+        .right-section {
+            width: 50%;
+            padding: 55px 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 390px;
+        }
+
+        .login-card h2 {
+            font-size: 31px;
+            color: #182235;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #788397;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #293449;
+            margin-bottom: 8px;
+        }
+
+        .input {
+            width: 100%;
+            height: 49px;
+            border: 1px solid #dce2eb;
+            border-radius: 10px;
+            padding: 0 15px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .input:focus {
+            border-color: #4f8cff;
+            box-shadow: 0 0 0 3px rgba(79,140,255,0.10);
+        }
+
+        .forgot-row {
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 22px;
+        }
+
+        .text-link {
+            border: none;
+            background: none;
+            color: #4f8cff;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn,
+        .primary-btn {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background: #4f8cff;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .login-btn:hover,
+        .primary-btn:hover {
+            background: #3978e8;
+            transform: translateY(-1px);
+        }
+
+        .switch-text {
+            text-align: center;
+            margin-top: 23px;
+            color: #7a8597;
+            font-size: 14px;
+        }
+
+        .switch-text button {
+            border: none;
+            background: none;
+            color: #4f8cff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .bottom-security {
+            text-align: center;
+            margin-top: 35px;
+            color: #9aa4b4;
+            font-size: 12px;
+        }
+
+        /* MODAL */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8,15,28,0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: 430px;
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            border: none;
+            background: none;
+            font-size: 24px;
+            color: #7c8798;
+            cursor: pointer;
+        }
+
+        .modal h3 {
+            font-size: 27px;
+            color: #182235;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            color: #7c8798;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .modal .input-group {
+            margin-bottom: 16px;
+        }
+
+        .secondary-btn {
+            width: 100%;
+            height: 48px;
+            margin-top: 12px;
+            border: 1px solid #dce2eb;
+            background: white;
+            color: #39465b;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .secondary-btn:hover {
+            background: #f5f7fa;
+        }
+
+        .verification-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #eaf2ff;
+            color: #4f8cff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 13px;
+            margin-top: 15px;
+            color: #667085;
+            line-height: 1.5;
+        }
+
+        @media(max-width: 800px) {
+            .container {
+                width: 95%;
+                min-height: auto;
+            }
+
+            .left-section {
+                display: none;
+            }
+
+            .right-section {
+                width: 100%;
+                padding: 45px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT SECTION -->
+
+    <div class="left-section">
+
+        <div class="logo">
+            Voice<span>Guard</span>
+        </div>
+
+        <h1>
+            Protect your identity from AI voice impersonation.
+        </h1>
+
+        <p>
+            VoiceGuard uses AI-powered voice analysis to detect cloned
+            and synthetic voices and help prevent impersonation attacks.
+        </p>
+
+        <div class="security-box">
+            <strong>🔐 Secure Voice Intelligence</strong>
+            <span>
+                Your account and detection activity are protected
+                using secure authentication.
+            </span>
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SECTION -->
+
+    <div class="right-section">
+
+        <div class="login-card">
+
+            <h2>Welcome back</h2>
+
+            <p class="subtitle">
+                Sign in to continue to VoiceGuard.
+            </p>
+
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+
+                <label>Email address</label>
+
+                <input
+                    class="input"
+                    type="email"
+                    placeholder="Enter your email"
+                    id="emailInput"
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    class="input"
+                    type="password"
+                    placeholder="Enter your password"
+                    id="passwordInput"
+                >
+
+            </div>
+
+
+            <!-- FORGOT PASSWORD -->
+
+            <div class="forgot-row">
+
+                <button
+                    class="text-link"
+                    id="forgotPasswordBtn"
+                >
+                    Forgot password?
+                </button>
+
+            </div>
+
+
+            <!-- SIGN IN -->
+
+            <button
+                class="login-btn"
+                id="loginBtn"
+            >
+                Sign in
+            </button>
+
+
+            <!-- SIGN UP LINK -->
+
+            <div class="switch-text">
+
+                Don't have an account?
+
+                <button id="openSignupBtn">
+                    Create account
+                </button>
+
+            </div>
+
+
+            <div class="bottom-security">
+                🔒 Secure authentication
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SIGN UP MODAL ================= -->
+
+<div
+    class="modal-overlay"
+    id="signupModal"
+>
+
+    <div class="modal">
+
+        <button
+            class="close-btn"
+            id="closeSignupBtn"
+        >
+            ×
+        </button>
+
+        <h3>Create account</h3>
+
+        <p class="modal-subtitle">
+            Create your VoiceGuard account using your email
+            and a new VoiceGuard password.
+        </p>
+
+
+        <!-- USERNAME -->
+
+        <div class="input-group">
+
+            <label>Username</label>
+
+            <input
+                class="input"
+                type="text"
+                placeholder="Choose a username"
+                id="signupUsername"
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+
+            <label>Email address</label>
+
+            <input
+                class="input"
+                type="email"
+                placeholder="Enter your email"
+                id="signupEmail"
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+            <label>Password</label>
+
+            <input
+                class="input"
+                type="password"
+                placeholder="Create a password"
+                id="signupPassword"
+            >
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="input-group">
+
+            <label>Confirm password</label>
+
+            <input
+                class="input"
+                type="password"
+                placeholder="Enter password again"
+                id="confirmPassword"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            id="signupBtn"
+        >
+            Create account
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            id="backToLoginFromSignup"
+        >
+            Back to sign in
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FORGOT PASSWORD MODAL ================= -->
+
+<div
+    class="modal-overlay"
+    id="forgotModal"
+>
+
+    <div class="modal">
+
+        <button
+            class="close-btn"
+            id="closeForgotBtn"
+        >
+            ×
+        </button>
+
+        <h3>Reset password</h3>
+
+        <p class="modal-subtitle">
+            Enter your email and we'll send you a password
+            reset link.
+        </p>
+
+
+        <div class="input-group">
+
+            <label>Email address</label>
+
+            <input
+                class="input"
+                type="email"
+                placeholder="Enter your email"
+                id="resetEmail"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            id="resetPasswordBtn"
+        >
+            Send reset link
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            id="backToLoginFromForgot"
+        >
+            Back to sign in
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ================= SIMPLE DEMO AUTH (no backend) ================= */
+    /* Sign in / Sign up works when password entered is "voiceguard"     */
+
+    const DEMO_PASSWORD = "voiceguard";
+
+
+    const loginBtn =
+        document.getElementById("loginBtn");
+
+    const emailInput =
+        document.getElementById("emailInput");
+
+    const passwordInput =
+        document.getElementById("passwordInput");
+
+
+    const signupModal =
+        document.getElementById("signupModal");
+
+    const forgotModal =
+        document.getElementById("forgotModal");
+
+
+    /* ================= OPEN / CLOSE MODALS ================= */
+
+    document.getElementById("openSignupBtn")
+        .addEventListener("click", () => {
+
+            signupModal.classList.add("active");
+
+        });
+
+
+    document.getElementById("closeSignupBtn")
+        .addEventListener("click", () => {
+
+            signupModal.classList.remove("active");
+
+        });
+
+
+    document.getElementById("backToLoginFromSignup")
+        .addEventListener("click", () => {
+
+            signupModal.classList.remove("active");
+
+        });
+
+
+    document.getElementById("forgotPasswordBtn")
+        .addEventListener("click", () => {
+
+            forgotModal.classList.add("active");
+
+        });
+
+
+    document.getElementById("closeForgotBtn")
+        .addEventListener("click", () => {
+
+            forgotModal.classList.remove("active");
+
+        });
+
+
+    document.getElementById("backToLoginFromForgot")
+        .addEventListener("click", () => {
+
+            forgotModal.classList.remove("active");
+
+        });
+
+
+    /* ================= LOGIN ================= */
+
+    loginBtn.addEventListener("click", () => {
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value.trim().toLowerCase();
+
+
+        if (!email || !password) {
+
+            alert("Please enter email and password.");
+
+            return;
+        }
+
+
+        if (password !== DEMO_PASSWORD) {
+
+            alert("Incorrect password. Hint: try the demo password.");
+
+            return;
+        }
+
+
+        localStorage.setItem("vg_user_email", email);
+
+        window.location.href = "dashboard.html";
+
+    });
+
+
+    /* ================= SIGN UP ================= */
+
+    document.getElementById("signupBtn")
+        .addEventListener("click", () => {
+
+            const username =
+                document.getElementById("signupUsername")
+                    .value.trim();
+
+            const email =
+                document.getElementById("signupEmail")
+                    .value.trim();
+
+            const password =
+                document.getElementById("signupPassword")
+                    .value.trim().toLowerCase();
+
+            const confirmPassword =
+                document.getElementById("confirmPassword")
+                    .value.trim().toLowerCase();
+
+
+            if (!username || !email || !password || !confirmPassword) {
+
+                alert("Please fill in all fields.");
+
+                return;
+            }
+
+
+            if (password !== confirmPassword) {
+
+                alert("Passwords do not match.");
+
+                return;
+            }
+
+
+            if (password !== DEMO_PASSWORD) {
+
+                alert("Incorrect password. Hint: try the demo password.");
+
+                return;
+            }
+
+
+            localStorage.setItem("vg_user_email", email);
+
+            localStorage.setItem("vg_user_name", username);
+
+            window.location.href = "dashboard.html";
+
+        });
+
+
+    /* ================= PASSWORD RESET (demo placeholder) ================= */
+
+    document.getElementById("resetPasswordBtn")
+        .addEventListener("click", () => {
+
+            const email =
+                document.getElementById("resetEmail")
+                    .value.trim();
+
+
+            if (!email) {
+
+                alert("Please enter your email.");
+
+                return;
+            }
+
+
+            alert("Password reset link sent to your email. (demo)");
+
+            forgotModal.classList.remove("active");
+
+        });
+
+
+    /* ================= CLICK OUTSIDE MODAL ================= */
+
+    window.addEventListener("click", (event) => {
+
+        if (event.target === signupModal) {
+
+            signupModal.classList.remove("active");
+
+        }
+
+        if (event.target === forgotModal) {
+
+            forgotModal.classList.remove("active");
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
